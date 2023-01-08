@@ -1,17 +1,13 @@
 package dataProcessor.inputData
 
+import kotlinx.serialization.*
 import dataProcessor.inputData.InputData
-import org.eclipse.jgit.revwalk.RevCommit
 
-data class CommitInfoDissertation(
-    val author: String,
-    val date: Long
+@Serializable
+data class DissertationResult(
+    var sizeOfCommits: Long= 0,
+    var numberOfCommits: Long = 0
 ) : InputData {
-    constructor(commit: RevCommit)
-            : this(
-        commit.authorIdent.emailAddress,
-        commit.commitTime * 1000L
-    )
-
-    constructor() : this("", 0)
+    constructor(size: Long) : this(size, 1)
+    constructor() : this(0, 0)
 }

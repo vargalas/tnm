@@ -1,22 +1,34 @@
 package dataProcessor
 
-import dataProcessor.inputData.UserChangedFiles
+import dataProcessor.inputData.CommitInfoDissertation
+import dataProcessor.inputData.DissertationResult
+import java.time.LocalDate
+import java.time.ZoneId
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.ConcurrentSkipListSet
 
-class ChangedFilesDataProcessor : DataProcessorMapped<UserChangedFiles>() {
 
-    private val _userFilesIds = ConcurrentHashMap<Int, ConcurrentSkipListSet<Int>>()
+class DissertationDataProcessor : DataProcessorMapped<CommitInfoDissertation>() {
 
-    val changedFilesByUsers: Map<Int, Set<Int>>
-        get() = _userFilesIds
+    private val _result = TreeMap<String, DissertationResult>()
 
-    override fun processData(data: UserChangedFiles) {
-        val userId = userMapper.add(data.user)
-        for (filePath in data.files) {
-            val fileId = fileMapper.add(filePath)
-            _userFilesIds.computeIfAbsent(userId) { ConcurrentSkipListSet() }.add(fileId)
+    val dissertationResult: Map<String, DissertationResult>
+        get() = _result
+
+    override fun processData(data: CommitInfoDissertation) {
+        val localDate: LocalDate = Date(data.date).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+        val year = localDate.year
+        val month = localDate.monthValue
+
+        val dateString = "$year.$month"
+        _result.computeIfPresent(dateString) { _, v ->
+            DissertationResult(
+                v.sizeOfCommits + data.commitSize,
+                v.numberOfCommits + 10
+            )
         }
+        _result.computeIfAbsent(dateString) { DissertationResult(data.commitSize) };
+
     }
 
     override fun calculate() {}
