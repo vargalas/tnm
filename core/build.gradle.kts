@@ -9,9 +9,9 @@ plugins {
 group = "me.xxx"
 version = "1.0-SNAPSHOT"
 
-val testConfig = configurations.create("testArtifacts") {
-    extendsFrom(configurations["testCompile"])
-}
+// val testConfig = configurations.create("testArtifacts") {
+//     extendsFrom(configurations["testCompile"])
+// }
 
 tasks.register("testJar", Jar::class.java) {
     dependsOn("testClasses")
@@ -19,9 +19,9 @@ tasks.register("testJar", Jar::class.java) {
     from(sourceSets["test"].output)
 }
 
-artifacts {
-    add("testArtifacts", tasks.named<Jar>("testJar"))
-}
+// artifacts {
+//     add("testArtifacts", tasks.named<Jar>("testJar"))
+// }
 
 dependencies {
     implementation("org.apache.commons:commons-text:1.9")

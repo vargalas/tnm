@@ -5,7 +5,7 @@ plugins {
 
 repositories {
     mavenCentral()
-    jcenter()
+    // jcenter()
 }
 
 subprojects {
@@ -15,7 +15,7 @@ subprojects {
     }
 
     repositories {
-        jcenter()
+        // jcenter()
         mavenCentral()
     }
 
