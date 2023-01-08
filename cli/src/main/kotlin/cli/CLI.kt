@@ -19,6 +19,7 @@ fun main(args: Array<String>) = CLI().subcommands(
     FilesOwnershipMinerCLI(),
     CommitInfluenceGraphMinerCLI(),
     WorkTimeMinerCLI(),
+    DissertationMinerCLI(),
     PageRankCalculationCLI(),
     CoordinationNeedsMatrixCalculationCLI(),
 ).main(args)

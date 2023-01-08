@@ -1,8 +1,10 @@
 .gradle
 .idea
+.vscode
 local_repository
 build
 resources
 _resources
 /core/src/test/tmp/
 /cli/src/test/tmp/
+**/bin/

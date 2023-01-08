@@ -76,7 +76,14 @@ abstract class GitMiner<T>(
      *
      */
     override fun run(dataProcessor: T) {
-        val branches = GitMinerUtil.findNeededBranches(threadLocalGit.get(), neededBranches)
+        var branches: Set<Ref>
+        if(neededBranches.isEmpty()) {
+            branches = threadLocalGit.get().branchList().call().toSet()
+            println("Empty branches")
+        } else {
+            branches = GitMinerUtil.findNeededBranches(threadLocalGit.get(), neededBranches)
+            println("Not empty branches")
+        }
         val threadPool = Executors.newFixedThreadPool(numThreads)
         processAllCommitsInThreadPool(branches, dataProcessor, threadPool)
         threadPool.shutdown()
