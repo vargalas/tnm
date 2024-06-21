@@ -1,6 +1,8 @@
 package cli
 
+import calculations.MirrorCongruenceCalculation
 import cli.calculculationsCLI.CoordinationNeedsMatrixCalculationCLI
+import cli.calculculationsCLI.MirrorCongruenceCalculationCLI
 import cli.calculculationsCLI.PageRankCalculationCLI
 import cli.gitMinersCLI.*
 import com.github.ajalt.clikt.core.CliktCommand
@@ -22,4 +24,5 @@ fun main(args: Array<String>) = CLI().subcommands(
     DissertationMinerCLI(),
     PageRankCalculationCLI(),
     CoordinationNeedsMatrixCalculationCLI(),
+    MirrorCongruenceCalculationCLI()
 ).main(args)
