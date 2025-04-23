@@ -35,6 +35,4 @@ tasks.withType<KotlinCompile> {
 dependencies {
     implementation(project(":core"))
     implementation("com.github.ajalt.clikt:clikt:3.1.0")
-
-    testImplementation(project(path = ":core", configuration = "testArtifacts"))
 }
